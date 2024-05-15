@@ -1,0 +1,6 @@
+django==4.2.11
+pillow==10.2.0
+django-environ==0.11.2
+flake8==7.0.0
+ipdb==0.13.13
+faker==24.3.0

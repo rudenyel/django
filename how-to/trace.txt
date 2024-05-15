@@ -1,0 +1,8 @@
+import ipdb
+ipdb.set_trace()
+# or
+export PYTHONBREAKPOINT=ipdb.set_trace
+breakpoint()
+
+import pprint
+pprint.pp(request.__dict__)

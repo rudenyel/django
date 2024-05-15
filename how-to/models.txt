@@ -1,0 +1,39 @@
+python manage.py migrate
+python manage.py createsuperuser
+
+python manage.py shell
+
+from django.contrib.auth.models import User
+
+# QuerySet object
+User.objects.all()
+User.objects.all().values()
+list(User.objects.all().values()[0])
+User.objects.all().values("username", "email")
+User.objects.all().values_list()
+User.objects.all().values_list("username", "email")
+User.objects.all().values_list("username", flat=True)
+
+
+User.objects.filter(is_superuser=True)
+
+# Model object
+user = User.objects.get(username="murkaliza")
+user.username
+user.email
+
+User.objects.filter(username="murkaliza").values()
+user.first_name = "Elyzaveta"
+user.last_name = "Rudenko"
+user.save()
+User.objects.filter(username="murkaliza").values()
+
+# add 'authors.apps.AuthorsConfig'
+# in setting.py INSTALLED_APPS for migration
+python manage.py makemigrations
+python manage.py migrate authors
+python manage.py migrate authors zero
+
+# add @admin.register(Author)
+# class AuthorAdmin(admin.ModelAdmin):
+# in authors/admin.py for model display in admin site

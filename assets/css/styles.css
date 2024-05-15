@@ -1,0 +1,97 @@
+@import url("reset.css");
+
+@font-face {
+  font-family: 'Lora';
+  src: url('../fonts/Lora-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lora';
+  src: url('../fonts/Lora-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/Montserrat-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/Montserrat-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Oxygen';
+  src: url('../fonts/Oxygen-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Oxygen';
+  src: url('../fonts/Oxygen-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fredericka the Great';
+  src: url('../fonts/FrederickatheGreat-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* *Global section*/
+
+html, body {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Oxygen", sans-serif;
+  color: darkslateblue;
+  font-weight: 400;
+}
+
+main {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.author {
+  height: 300px;
+  width: 200px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+li {
+  height: 30px;
+}
+
+p {
+  line-height: 24px;
+}

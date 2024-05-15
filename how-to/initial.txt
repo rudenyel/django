@@ -1,0 +1,22 @@
+mkdir django && cd django
+python -m venv .venv
+source .venv/bin/activate
+# .venv\scripts\activate.bat
+python -m pip install --upgrade pip
+# pip install django == 4.2.11
+pip install -r requirements.txt
+pip freeze
+
+django-admin startproject project
+python manage.py runserver
+# Your project may not work properly until you apply the migrations for app(s):
+# admin, auth, contenttypes, sessions.
+django-admin startapp authors
+# add urls in project\urls.py
+# add urls in authors\urls.py & add views authors\views.py
+# add to project\setting.py:
+# TEMPLATES = [ { 'DIRS': BASE_DIR / 'templates', ...
+# STATIC_ROOT = 'static_files'
+# STATICFILES_DIRS = [BASE_DIR / 'assets']
+# MEDIA_URL = 'media/'
+# MEDIA_ROOT = 'media'
