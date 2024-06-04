@@ -5,15 +5,22 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env = environ.Env(
-    DEBUG=(bool, True),
-    SECRET_KEY=(str, 'tz@3^)sb*n^6f9jw5#pea*cg+^pwk+v)6#%$!dh)z0i5uj946n'),
-)
+env = environ.Env()
 environ.Env.read_env(BASE_DIR / '.env')
 
-SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG', default=True, cast=bool)
 
-DEBUG = env('DEBUG')
+SECRET_KEY = env('SECRET_KEY', default='tz@3^)sb*n^6f9jw5#pea*cg+^pwk+v)6#%$!dh)z0i5uj946n')
+
+EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY', default='')
+if EMAIL_HOST_PASSWORD:
+    EMAIL_HOST = 'smtp.sendgrid.net'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = 'apikey'
+    DEFAULT_FROM_EMAIL = env('FROM_EMAIL', default='')
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ALLOWED_HOSTS = []
 
@@ -39,6 +46,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'project.urls'
+
+# LOGIN_REDIRECT_URL = 'account:profile'
+# LOGIN_URL = 'account:login'
+# LOGOUT_URL = 'home:about'
 
 TEMPLATES = [
     {

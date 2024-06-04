@@ -1,4 +1,4 @@
-@import url("reset.css");
+/*@import url("reset.css");*/
 
 @font-face {
   font-family: 'Lora';
@@ -70,28 +70,28 @@ html, body {
   scroll-behavior: smooth;
 }
 
-body {
-  font-family: "Oxygen", sans-serif;
-  color: darkslateblue;
-  font-weight: 400;
-}
+/*body {*/
+/*  font-family: "Oxygen", sans-serif;*/
+/*  color: darkslateblue;*/
+/*  font-weight: 400;*/
+/*}*/
 
-main {
-  padding-top: 40px;
-  padding-bottom: 40px;
-}
+/*main {*/
+/*  padding-top: 40px;*/
+/*  padding-bottom: 40px;*/
+/*}*/
 
-.author {
-  height: 300px;
-  width: 200px;
-  object-fit: cover;
-  margin-bottom: 20px;
-}
+/*.author {*/
+/*  height: 300px;*/
+/*  width: 200px;*/
+/*  object-fit: cover;*/
+/*  margin-bottom: 20px;*/
+/*}*/
 
-li {
-  height: 30px;
-}
+/*li {*/
+/*  height: 30px;*/
+/*}*/
 
-p {
-  line-height: 24px;
-}
+/*p {*/
+/*  line-height: 24px;*/
+/*}*/
