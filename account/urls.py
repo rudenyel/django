@@ -7,7 +7,10 @@ from django.contrib.auth.views import (
     PasswordResetConfirmView, PasswordResetCompleteView
 )
 
-from .views import ProfileView, SignupView, WelcomeView
+from .views import (
+    ProfileView, ProfileUpdateView, ProfileUpdateDoneView,
+    SignupView, WelcomeView
+)
 
 app_name = 'account'
 
@@ -16,8 +19,12 @@ urlpatterns = [
     # path('login/', login_view, name="login"),
 
     path('', ProfileView.as_view(), name='profile'),
+    path('update/<int:pk>/', ProfileUpdateView.as_view(), name='update'),
+    path('update/done/', ProfileUpdateDoneView.as_view(), name='updated'),
+
     path('signup', SignupView.as_view(), name='signup'),
     path('welcome', WelcomeView.as_view(), name='welcome'),
+
 
     # https://github.com/django/django/blob/stable/4.2.x/django/contrib/auth/views.py
 

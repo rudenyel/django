@@ -5,7 +5,13 @@
 {% block content %}
 <div>
     <h1>Profile</h1>
-    <p>Welcome to your profile, {{ user.username }}!</p>
+    <p>Welcome to your account!</p>
+    <p>Username: {{ user.username }}</p>
+    <p>E-mail: {{ user.email }}</p>
+    <p>First name: {{ user.profile.first_name }}</p>
+    <p>Last name: {{ user.profile.last_name }}</p>
+    <p>Phone: {{ user.profile.phone }}</p>
     <p>You can <a href="{% url 'account:change' %}">change you password</a>.</p>
+    <p>You can <a href="{% url 'account:update' user.profile.id %}">update you profile</a>.</p>
 </div>
 {% endblock content %}

@@ -7,9 +7,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordResetView
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
+
 
 from .forms import SignUpForm
+from .models import Profile
 
 
 class ProfileView(LoginRequiredMixin, TemplateView):
@@ -17,10 +19,21 @@ class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'account/profile.html'
 
 
-class SignupView(CreateView, PasswordResetView):
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    fields = ["first_name", "last_name", "phone"]
+    success_url = "account:updated"
+    template_name = 'account/update.html'
+
+
+class ProfileUpdateDoneView(TemplateView):
+    template_name = 'account/updated.html'
+
+
+class SignupView(CreateView):
     form_class = SignUpForm  # UserCreationForm
     template_name = 'account/signup.html'
-    success_url = reverse_lazy('account:profile')
+    success_url = reverse_lazy('account:welcome')
     success_message = "Your profile was created successfully"
 
 
