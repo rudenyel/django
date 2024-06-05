@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authors.apps.AuthorsConfig',
     'books.apps.BooksConfig',
-    'account.apps.AccountsConfig',
+    'accounts.apps.AccountsConfig',
 
 ]
 

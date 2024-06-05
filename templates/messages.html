@@ -1,7 +1,10 @@
 {% if messages %}
     {% for message in messages %}
-        <p>{{ message | safe }}</p>
+        <strong>{{ message }}</strong>
     {% endfor %}
+{% else %}
+    {% block welcome %}
+    {% endblock welcome %}
 {% endif %}
 
 {#{% if messages %}#}

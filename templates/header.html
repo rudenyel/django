@@ -9,7 +9,7 @@
     <li><a href="{% url 'books:list' %}">Books</a></li>
     <li><a href="{% url 'authors:list' %}">Authors</a></li> 
     {% if user.is_authenticated %}
-    <li><a href="{% url 'account:profile' %}">{{ user.email }}</a></li>
+    <li><a href="{% url 'account:profile' user.profile.id %}">{{ user.email }}</a></li>
     <li><a href="{% url 'account:logout' %}">Logout</a></li>
     {% else %}
     <li><a href="{% url 'account:login' %}">Login</a></li>

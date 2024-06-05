@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+<div>
+    <h1>Profile</h1>
+    {% include 'messages.html' %}
+    {% if not messages %}
+    <p>Welcome to your account!</p>
+    {% endif %}
+    {% include 'errors.html' %}    
+    <form method="post">
+        <p><label for="id_username">Username:</label></p>
+        <p><input type="text" value="{{ user.username }}" id="id_username" readonly></p>
+        <p><label for="id_email">E-mail:</label></p>
+        <p><input type="text" value="{{ user.email }}" id="id_email" readonly></p>
+        <p>{{ form.first_name.label_tag }}</p>
+        <p>{{ form.first_name }}</p>
+        <p>{{ form.last_name.label_tag }}</p>
+        <p>{{ form.last_name }}</p>
+        <p>{{ form.phone.label_tag }}</p>
+        <p>{{ form.phone }}</p>
+        <p>{{ form.address.label_tag }}</p>
+        <p>{{ form.address }}</p>
+        {% csrf_token %}
+        <p><input type="submit" value="Update profile"></p>
+    </form>
+    <p><a href="{% url 'account:password_change' %}"><button>Change password</button></a></p>
+</div>
+{% endblock content %}
