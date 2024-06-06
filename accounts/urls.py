@@ -1,5 +1,4 @@
 from django.urls import path, reverse_lazy
-from django.contrib.auth.views import LoginView, LogoutView
 
 from .views import (
     Login, Logout,

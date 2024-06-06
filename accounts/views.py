@@ -19,11 +19,19 @@ from .models import Profile
 
 class Login(LoginView):
     template_name = 'accounts/login.html'
-    next_page = reverse_lazy('home:about')
+    success_message = "You have successfully logged in!"
+
+    def get_success_url(self):
+        messages.success(self.request, self.success_message)
+        return reverse_lazy('home:about')
 
 
 class Logout(LogoutView):
-    next_page = reverse_lazy('home:about')
+    success_message = "You have successfully logged out!"
+
+    def get_success_url(self):
+        messages.success(self.request, self.success_message)
+        return reverse_lazy('home:about')
 
 
 class Account(LoginRequiredMixin, UpdateView):
