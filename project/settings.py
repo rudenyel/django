@@ -12,15 +12,7 @@ DEBUG = env('DEBUG', default=True, cast=bool)
 
 SECRET_KEY = env('SECRET_KEY', default='tz@3^)sb*n^6f9jw5#pea*cg+^pwk+v)6#%$!dh)z0i5uj946n')
 
-EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY', default='')
-if EMAIL_HOST_PASSWORD:
-    EMAIL_HOST = 'smtp.sendgrid.net'
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = 'apikey'
-    DEFAULT_FROM_EMAIL = env('FROM_EMAIL', default='')
-else:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ALLOWED_HOSTS = []
 

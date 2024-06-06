@@ -12,7 +12,7 @@ from django.contrib.auth.views import (
     PasswordResetView,
     PasswordResetConfirmView,
 )
-
+from django.contrib.auth.forms import UserCreationForm
 from .forms import SignupForm
 from .models import Profile
 
@@ -34,6 +34,16 @@ class Logout(LogoutView):
         return reverse_lazy('home:about')
 
 
+class Signup(CreateView):
+    form_class = SignupForm
+    template_name = 'accounts/signup.html'
+    success_message = "Your account was created successfully!"
+
+    def get_success_url(self):
+        messages.success(self.request, self.success_message)
+        return reverse_lazy('account:login')
+
+
 class Account(LoginRequiredMixin, UpdateView):
     model = Profile
     fields = ["first_name", "last_name", "phone", "address"]
@@ -43,16 +53,6 @@ class Account(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         messages.success(self.request, self.success_message)
         return reverse_lazy('account:profile', kwargs={'pk': self.object.pk})
-
-
-class Signup(CreateView):
-    form_class = SignupForm
-    template_name = 'accounts/signup.html'
-    success_message = "Your account was created successfully!"
-
-    def get_success_url(self):
-        messages.success(self.request, self.success_message)
-        return reverse_lazy('account:login')
 
 
 class PasswordChange (LoginRequiredMixin, PasswordChangeView):
