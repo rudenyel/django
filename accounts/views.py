@@ -12,7 +12,7 @@ from django.contrib.auth.views import (
     PasswordResetView,
     PasswordResetConfirmView,
 )
-from django.contrib.auth.forms import UserCreationForm
+
 from .forms import SignupForm
 from .models import Profile
 
