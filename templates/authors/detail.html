@@ -3,16 +3,17 @@
 {% block title %}{{ author.name }} {{ author.surname }}{% endblock title %}
 
 {% block content %}
-<img class="author" src="/media/authors/placeholder.jpg" alt="placeholder" width="300" height="300">
-<p>{{ author.name }} {{ author.surname }}</p>
-{% if author.died is None %}
-<p>{{ author.born }}</p>
-{% else %}
-<p>{{ author.born }} - {{ author.died }}</p>
-{% endif %}
-<ul>   
-{% for book in author.books.all %}
-    <li><a href="{% url 'books:detail' book.slug %}">{{ book.title }}</a>, {{ book.finished|date:"Y" }}</li>
-{% endfor %} 
-</ul> 
+<div>
+    <h1>{{ author.name }} {{ author.surname }}</h1>
+    {% if author.died is None %}
+    <p>{{ author.born }}</p>
+    {% else %}
+    <p>{{ author.born }} - {{ author.died }}</p>
+    {% endif %}
+    <ul>   
+    {% for book in author.books.all %}
+        <li><a href="{% url 'books:detail' book.slug %}">{{ book.title }}</a>, {{ book.finished|date:'Y' }}</li>
+    {% endfor %} 
+    </ul>
+</div> 
 {% endblock content %}

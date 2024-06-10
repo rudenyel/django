@@ -12,12 +12,15 @@ class Book(BaseModel):
     # optional fields with blank (or default) values
     finished = models.DateField(blank=True, null=True)
 
-    author = models.ForeignKey(
+    authors = models.ManyToManyField(
         Author,
-        on_delete=models.SET_NULL,
-        blank=True, null=True,
-        related_name='books'
+        blank=True,
+        related_name='books',
+        related_query_name='book'
     )
+
+    def written_by(self):
+        return ", ".join([author.surname for author in self.authors.all()])
 
     class Meta:
         ordering = ['title']
@@ -26,4 +29,4 @@ class Book(BaseModel):
         ]
 
     def __str__(self):
-        return f"{self.title}"
+        return self.title

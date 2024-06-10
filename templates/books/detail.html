@@ -3,7 +3,13 @@
 {% block title %}{{ book.title }}{% endblock title %}
 
 {% block content %}
-<p>Author: <a href="{% url 'authors:detail' book.author.slug %}">{{ book.author.name }} {{ book.author.surname }}</a></p>
-<p>Title: {{ book.title }}</p>
-<p>Finished: {{ book.finished }}</p>
+<div>
+    <h1>{{ book.title }}</h1>
+    <p>
+    {% for author in book.authors.all %}
+    <a href="{% url 'authors:detail' author.slug %}">{{ author.name }} {{ author.surname }}</a>,
+    {% endfor %}
+    {{ book.finished|date:'Y' }}
+    </p>
+</div>
 {% endblock content %}

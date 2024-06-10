@@ -10,18 +10,21 @@
 </head>
 <body>
 <header>
-{% block header %}
-    {% include 'header.html' %}
-{% endblock header %}
+    {% block header %}
+        {% include 'header.html' %}
+    {% endblock header %}
 </header>
 <main>
-{% block content %}
-{% endblock content %}
+{#    {% block sidebar %}#}
+{#        {% include 'sidebar.html' %}#}
+{#    {% endblock sidebar %}#}
+    {% block content %}
+    {% endblock content %}
 </main>
 <footer>
-{% block footer %}
-    {% include 'footer.html' %}
-{% endblock footer %}
+    {% block footer %}
+        {% include 'footer.html' %}
+    {% endblock footer %}
 </footer>
 
 </body>

@@ -4,3 +4,4 @@ django-environ==0.11.2
 flake8==7.0.0
 ipdb==0.13.13
 faker==24.3.0
+django-debug-toolbar==4.4.2

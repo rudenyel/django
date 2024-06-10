@@ -3,8 +3,10 @@
 {% block title %}Authors{% endblock title %}
 
 {% block content %}
-<ul>    
-{% for author in authors %}
+<div>    
+    <h1>Authors</h1>
+    <ul>    
+    {% for author in authors %}
     <li>
         <a href="{% url 'authors:detail' author.slug %}">{{ author.name }} {{ author.surname }}</a>, 
         {% if author.died is None %}
@@ -13,6 +15,7 @@
         {{ author.born }} - {{ author.died }}
         {% endif %}
     </li>
-{% endfor %}
-</ul>
+    {% endfor %}
+    </ul>
+</div>
 {% endblock content %}
