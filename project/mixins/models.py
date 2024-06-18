@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from project.enums import StatusTypes
 
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(status=BaseModel.Status.PUBLISHED)
+        return super().get_queryset().filter(status=StatusTypes.PUBLISHED)
 
 
 class BaseModel(models.Model):
@@ -25,14 +26,9 @@ class BaseModel(models.Model):
         related_name="+"
     )
 
-    class Status(models.TextChoices):
-        DRAFT = 'DRA', 'Draft'
-        PUBLISHED = 'PUB', 'Published'
-        DELETED = 'DEL', 'Deleted'
-
     status = models.CharField(max_length=3,
-                              choices=Status.choices,
-                              default=Status.DRAFT)
+                              choices=StatusTypes.choices,
+                              default=StatusTypes.DRAFT)
 
     objects = models.Manager()
     published = PublishedManager()

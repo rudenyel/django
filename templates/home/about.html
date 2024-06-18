@@ -1,10 +1,29 @@
-`{% extends 'index.html' %}
+{% extends 'index.html' %}
 
 {% block title %}About{% endblock title %}
 
+{% load static %}
+
 {% block content %}
-<div>
-    <h1>Home page</h1>
-    {% include 'messages.html' %}
+<div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static '/images/book1.jpg' %}" class="d-block w-100" alt="Books">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static '/images/book2.jpg' %}" class="d-block w-100" alt="Books">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static '/images/book3.jpg' %}" class="d-block w-100" alt="Books">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 {% endblock content %}

@@ -19,3 +19,12 @@ def detail_view(request, slug):
         'book': book,
     }
     return render(request, template_name, context)
+
+
+def category_view(request, slug):
+    template_name = 'books/list.html'
+    books = Book.published.filter(category__slug__contains=slug)
+    context = {
+        'books': books,
+    }
+    return render(request, template_name, context)

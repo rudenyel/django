@@ -6,15 +6,54 @@
 <div>
     <h1>Books</h1>
     <ul>    
-    {% for book in books %}
+        {% for book in books %}
         <li>
-        <a href="{% url 'books:detail' book.slug %}">{{ book.title }}</a>,
-        {% for author in book.authors.all %}
-        <a href="{% url 'authors:detail' author.slug %}">{{ author.name }} {{ author.surname }}</a>,
-        {% endfor %}
-        {{ book.finished|date:'Y' }}
+            <a href="{% url 'books:detail' book.slug %}">{{ book.title }}</a>,
+        
+            {% for author in book.authors.all %}
+            <a href="{% url 'authors:detail' author.slug %}">{{ author.name }} {{ author.surname }}</a>,
+            {% endfor %}
+        
+            {{ book.finished|date:'Y' }},
+            
+            {% if not user.is_authenticated %}
+                <i class="bi bi-heart">{{ book.favorites.count }}</i>
+            {% else %}
+                <a href="javascript:void(0)" 
+                   class="toggle-link" 
+                   data-url="{% url 'favorites:ajax_toggle' book.slug %}">
+                {% if user in book.favorites.all %}
+                    <i class="bi bi-heart-fill">{{ book.favorites.count }}</i>
+                {% else %}
+                    <i class="bi bi-heart">{{ book.favorites.count }}</i>
+                {% endif %}
+                </a>
+            {% endif %}
+        
+{#            {% if not user.is_authenticated %}#}
+{#                <i class="bi bi-heart"></i>#}
+{#            {% else %}#}
+{#                <a href="{% url 'favorites:toggle' book.slug %}">#}
+{#                {% if user in book.favorites.all %}#}
+{#                    <i class="bi bi-heart-fill"></i>#}
+{#                {% else %}#}
+{#                    <i class="bi bi-heart"></i>#}
+{#                {% endif %}#}
+{#                </a>#}
+{#            {% endif %}#}
+        
+        
         </li>
-    {% endfor %}
+        {% endfor %}
     </ul>
 </div>
 {% endblock content %}
+{% block extra_scripts %}
+<script>
+  $(document).ready(function () {
+    $('.toggle-link').click(function () {
+      toggle($(this))
+    })
+  })
+</script>
+{% endblock extra_scripts %}

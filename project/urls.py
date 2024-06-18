@@ -8,6 +8,9 @@ urlpatterns = [
     path('account/', include('accounts.urls', namespace='account')),
     path('authors/', include('authors.urls', namespace='authors')),
     path('books/', include('books.urls', namespace='books')),
+    path('favorites/', include('favorites.urls', namespace='favorites')),
+    path('reviews/', include('reviews.urls', namespace='reviews')),
+    path('tools/', include('tools.urls', namespace='tools')),
     path('', include('home.urls', namespace='home')),
 ]
 

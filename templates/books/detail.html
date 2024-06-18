@@ -11,5 +11,21 @@
     {% endfor %}
     {{ book.finished|date:'Y' }}
     </p>
+    {% if user.is_authenticated %}
+        <p><a href="{% url 'reviews:create' book.slug %}"><button>Create reviews</button></a></p>
+    {% endif %}
+    {% for review in book.reviews.all %}
+    <p>
+        {{ review.creator.profile.first_name }} {{ review.creator.profile.last_name }},
+        {{ review.title }},
+        {{ review.rating }},
+        {% for i in '12345' %}
+            {% if forloop.counter <= review.rating %}
+                 <i class="bi bi-star-fill"></i>
+            {% endif %}
+        {% endfor %},
+        {{  review.created }}
+    </p>
+    {% endfor%}
 </div>
 {% endblock content %}

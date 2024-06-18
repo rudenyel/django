@@ -1,7 +1,3 @@
-# https://ccbv.co.uk/projects/Django/4.2/
-# https://github.com/django/django/blob/stable/4.2.x/django/contrib/auth/views.py
-# https://github.com/django/django/blob/stable/4.2.x/django/views/generic/edit.py
-
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -23,6 +19,9 @@ class Login(LoginView):
 
     def get_success_url(self):
         messages.success(self.request, self.success_message)
+        next_url = self.request.GET.get('next') or self.request.POST.get('next')
+        if next_url:
+            return next_url
         return reverse_lazy('home:about')
 
 

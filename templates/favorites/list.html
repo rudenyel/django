@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+
+{% block title %}Books{% endblock title %}
+
+{% block content %}
+<div>
+    <h1>Favorite books</h1>
+    <ul>
+    {% for book in books %}
+        <li>
+        <a href="{% url 'books:detail' book.slug %}">{{ book.title }}</a>,
+        {% for author in book.authors.all %}
+        <a href="{% url 'authors:detail' author.slug %}">{{ author.name }} {{ author.surname }}</a>,
+        {% endfor %}
+        {{ book.finished|date:'Y' }}
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock content %}

@@ -1,22 +1,45 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 from authors.models import Author
 from project.mixins.models import BaseModel
 
 
+class Category(BaseModel):
+    name = models.CharField(max_length=100, unique=True, blank=False)
+    slug = models.SlugField(unique=True)
+    order = models.PositiveSmallIntegerField(default=0)
+
+    class Meta:
+        verbose_name_plural = "categories"
+        ordering = ['order', 'name']
+
+    def __str__(self):
+        return self.name
+
+
 class Book(BaseModel):
-    # required fields
     slug = models.SlugField(max_length=250, unique=True)
     title = models.CharField(max_length=250)
-
-    # optional fields with blank (or default) values
+    description = models.TextField(blank=True)
     finished = models.DateField(blank=True, null=True)
+    image = models.ImageField(upload_to='books', default='placeholder.jpg')
+
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.SET_NULL,
+        null=True)
 
     authors = models.ManyToManyField(
         Author,
         blank=True,
         related_name='books',
-        related_query_name='book'
+    )
+
+    favorites = models.ManyToManyField(
+        User,
+        blank=True,
+        related_name='favorites',
     )
 
     def written_by(self):
@@ -24,9 +47,6 @@ class Book(BaseModel):
 
     class Meta:
         ordering = ['title']
-        indexes = [
-            models.Index(fields=['title']),
-        ]
 
     def __str__(self):
         return self.title

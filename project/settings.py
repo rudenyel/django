@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'authors.apps.AuthorsConfig',
     'books.apps.BooksConfig',
     'accounts.apps.AccountsConfig',
+    'reviews.apps.ReviewsConfig'
 
 ]
 
@@ -50,7 +51,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'project.urls'
 
 # LOGIN_REDIRECT_URL = 'account:profile'
-# LOGIN_URL = 'account:login'
+LOGIN_URL = 'account:login'
 # LOGOUT_URL = 'home:about'
 
 TEMPLATES = [
@@ -64,6 +65,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'project.context.menu',
             ],
         },
     },
@@ -103,7 +106,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = 'static_files'
-STATICFILES_DIRS = [BASE_DIR / 'assets']
+STATICFILES_DIRS = [BASE_DIR / 'static']
 MEDIA_URL = 'media/'
 MEDIA_ROOT = 'media'
 

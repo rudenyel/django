@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block title %}Tools{% endblock title %}
+
+{% block content %}
+<div class="d-grid gap-2 col-4 mx-auto">
+  <a class="btn btn-primary" href="{% url 'tools:upload' %}" role="button">Upload data</a>
+  <a class="btn btn-primary" href="{% url 'tools:botfarm' %}" role="button">Create bot farm</a>
+  <a class="btn btn-primary" href="{% url 'tools:favorites' %}" role="button">Create favorites</a>
+  <a class="btn btn-primary" href="{% url 'tools:reviews' %}" role="button">Create reviews</a>
+</div>  
+{% endblock content %}

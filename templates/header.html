@@ -1,18 +1,50 @@
 {% load static %}
-<div>
-    <a href="{% url 'home:about' %}">
-        <img src="{% static 'images/bookcat_logo.png' %}" alt="logo" width="100" height="100">
+<nav class="navbar nav-underline navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home:about' %}">
+      <img src="{% static '/images/logo.svg' %}" alt="Bookcat" width="50" height="50">
     </a>
-</div>
-<ul>
-    <li><a href="{% url 'home:about' %}">Home</a></li>
-    <li><a href="{% url 'books:list' %}">Books</a></li>
-    <li><a href="{% url 'authors:list' %}">Authors</a></li> 
-    {% if user.is_authenticated %}
-    <li><a href="{% url 'account:profile' user.profile.id %}">{{ user.email }}</a></li>
-    <li><a href="{% url 'account:logout' %}">Logout</a></li>
-    {% else %}
-    <li><a href="{% url 'account:login' %}">Login</a></li>
-    <li><a href="{% url 'account:signup' %}">Sign up</a></li>
-    {% endif %}
-</ul>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+{#        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home:about' %}">home</a></li>#}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'authors:list' %}">authors</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="{% url 'books:list' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            books
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'books:list' %}">all</a></li>
+            {% for category in categories %}
+            <li><a class="dropdown-item" href="{% url 'books:category' category.slug %}">{{ category.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'favorites:list' %}">favorites</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'account:profile' user.profile.id %}">{{ user.email }}</a></li>
+        {% if user.is_superuser %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'tools:list'%}">tools</a></li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">tools</a></li>    
+        {% endif %}    
+        {% else %}
+        <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">favorites</a></li>
+        <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">profile</a></li>
+        <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">tools</a></li>     
+        {% endif %}
+      </ul>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        {% if user.is_authenticated %}
+        <a class="btn btn-light me-md-2" href="{% url 'account:logout' %}" role="button">logout</a>
+        {% else %}
+        <a class="{% if 'login' in request.path %}btn btn-primary{% else %}btn btn-light{% endif %} me-md-2" href="{% url 'account:login' %}" role="button">login</a>
+        <a class="{% if 'signup' in request.path %}btn btn-primary{% else %}btn btn-light{% endif %} me-md-2" href="{% url 'account:signup' %}" role="button">signup</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>

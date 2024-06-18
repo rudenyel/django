@@ -1,7 +1,7 @@
 {% if form.errors %}
-    <div>
-        <p>Please fix the following errors:</p>
-        <ul>
+<div>
+    <p>Please fix the following errors:</p>
+    <ul>
         {% for field in form %}
             {% if field.errors %}
             {% for error in field.errors %}
@@ -9,27 +9,9 @@
             {% endfor %}
             {% endif %}
         {% endfor %}
-        </ul>
-        {% if form.non_field_errors %}
-        {{ form.non_field_errors }}
-        {% endif %}
-    </div>
+    </ul>
+    {% if form.non_field_errors %}
+    {{ form.non_field_errors }}
+    {% endif %}
+</div>
 {% endif %}
-
-{#{% if form.errors %}#}
-{#    <div class="alert alert-error">#}
-{#        <h4>Please fix the following errors</h4>#}
-{#        <ul>#}
-{#        {% for field in form %}#}
-{#            {% if field.errors %}#}
-{#            {% for error in field.errors %}#}
-{#                <li><a href="#id_{{ field.name }}" class="error">{{ error | escape }}</a></li>#}
-{#            {% endfor %}#}
-{#            {% endif %}#}
-{#        {% endfor %}#}
-{#        </ul>#}
-{#        {% if form.non_field_errors %}#}
-{#        {{ form.non_field_errors }}#}
-{#        {% endif %}#}
-{#    </div>#}
-{#{% endif %}#}
