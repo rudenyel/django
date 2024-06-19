@@ -13,5 +13,6 @@ class Review(BaseModel):
 
     class Meta:
         default_related_name = 'reviews'
+        ordering = ('-created', 'title')
 
 

@@ -3,18 +3,28 @@
 {% block title %}Books{% endblock title %}
 
 {% block content %}
-<div>
-    <h1>Favorite books</h1>
-    <ul>
-    {% for book in books %}
-        <li>
-        <a href="{% url 'books:detail' book.slug %}">{{ book.title }}</a>,
+<div class="row row-cols-1 row-cols-md-6 g-2"> 
+  {% for book in books %}
+  <div class="col">
+    <div class="card text-bg-light h-100">
+      <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ book.title }}</h5>
         {% for author in book.authors.all %}
-        <a href="{% url 'authors:detail' author.slug %}">{{ author.name }} {{ author.surname }}</a>,
+        <h6 class="card-title"><a href="{% url 'authors:detail' author.slug %}">{{ author.name }} {{ author.surname }}</a></h6>
         {% endfor %}
-        {{ book.finished|date:'Y' }}
-        </li>
-    {% endfor %}
-    </ul>
+        <p class="card-text"><small class="text-body-secondary">{{ book.finished|date:'Y' }}</small></p>
+      </div>
+      
+      <div class="card-footer">
+        <a class="btn btn-primary" href="{% url 'books:detail' book.slug%}" role="button">View</a>
+        <a class="btn btn-primary" href="{% url 'favorites:toggle' book.slug%}" role="button">Delete</a>   
+      </div>
+    </div>
+  
+  </div>
+  {% endfor %}
 </div>
 {% endblock content %}
+
+

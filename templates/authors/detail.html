@@ -26,6 +26,6 @@
       {% for book in author.books.all %}
       <li class="list-group-item"><a href="{% url 'books:detail' book.slug %}">{{ book.title }}</a>, {{ book.finished|date:'Y' }}</li>
       {% endfor %}
-    </ul>
+  </ul>
 </div>    
 {% endblock content %}

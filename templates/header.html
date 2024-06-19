@@ -10,9 +10,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'authors:list' %}">authors</a></li>
+            <a class="nav-link{% if 'authors' in request.path %} active{% endif %}" href="{% url 'authors:list' %}">authors</a></li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="{% url 'books:list' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle {% if 'books' in request.path %} active{% endif %}" href="{% url 'books:list' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             books
           </a>
           <ul class="dropdown-menu">
@@ -23,10 +23,10 @@
           </ul>
         </li>
         {% if user.is_authenticated %}
-        <li class="nav-item"><a class="nav-link" href="{% url 'favorites:list' %}">favorites</a></li>
-        <li class="nav-item"><a class="nav-link" href="{% url 'account:profile' user.profile.id %}">{{ user.email }}</a></li>
+        <li class="nav-item"><a class="nav-link {% if 'favorites' in request.path %} active{% endif %}" href="{% url 'favorites:list' %}">favorites</a></li>
+        <li class="nav-item"><a class="nav-link {% if 'account' in request.path %} active{% endif %}" href="{% url 'account:profile' user.profile.id %}">{{ user.email }}</a></li>
         {% if user.is_superuser %}
-        <li class="nav-item"><a class="nav-link" href="{% url 'tools:list'%}">tools</a></li>
+        <li class="nav-item"><a class="nav-link {% if 'tools' in request.path %} active{% endif %}" href="{% url 'tools:list'%}">tools</a></li>
         {% else %}
         <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">tools</a></li>    
         {% endif %}    

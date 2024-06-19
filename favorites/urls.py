@@ -8,3 +8,6 @@ urlpatterns = [
     path('<slug:slug>', toggle_view, name="toggle"),
     path('<slug:slug>/ajax', ajax_toggle_view, name="ajax_toggle"),
 ]
+
+
+

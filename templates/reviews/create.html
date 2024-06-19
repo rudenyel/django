@@ -3,20 +3,30 @@
 {% block title %}{{ book.title }}{% endblock title %}
 
 {% block content %}
-<div>
-    <h1>{{ book.title }}</h1>
-    <p>
-    {% for author in book.authors.all %}
-    <a href="{% url 'authors:detail' author.slug %}">{{ author.name }} {{ author.surname }}</a>,
-    {% endfor %}
-    {{ book.finished|date:'Y' }}
-    </p>
-    {% if user.is_authenticated %}
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="Post review"></p>
-    </form>
-    {% endif %}
+{% include 'errors.html' %}      
+<div class="d-grid gap-2 col-6 mx-auto mt-3">
+ <h1>{{ book.title }}</h1>
+<form class="border rounded p-3" method="post">
+  <div class="mb-2">
+    <label for="id_title" class="form-label">Title</label>
+    <input type="text" class="form-control" name="title" id="id_title" required>
+  </div>    
+  <div class="mb-2">
+    <label for="id_rating">Rating:</label>
+    <select class="form-select" name="rating" id="id_rating">
+      <option value="1">Poor</option>
+      <option value="2">Fair</option>
+      <option value="3">Good</option>
+      <option value="4">Very good</option>
+      <option value="5" selected>Excellent</option>
+    </select>
+  </div>
+  <div class="mb-2">
+    <label for="id_body" class="form-label">Body</label>
+    <textarea class="form-control" name="body" id="id_body" rows="15" required></textarea>
+  </div>    
+  {% csrf_token %}    
+  <button type="submit" class="btn btn-primary">Create review</button>
+</form>
 </div>
 {% endblock content %}
