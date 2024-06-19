@@ -3,29 +3,46 @@
 {% block title %}{{ book.title }}{% endblock title %}
 
 {% block content %}
-<div>
-    <h1>{{ book.title }}</h1>
-    <p>
-    {% for author in book.authors.all %}
-    <a href="{% url 'authors:detail' author.slug %}">{{ author.name }} {{ author.surname }}</a>,
-    {% endfor %}
-    {{ book.finished|date:'Y' }}
-    </p>
-    {% if user.is_authenticated %}
-        <p><a href="{% url 'reviews:create' book.slug %}"><button>Create reviews</button></a></p>
-    {% endif %}
-    {% for review in book.reviews.all %}
-    <p>
-        {{ review.creator.profile.first_name }} {{ review.creator.profile.last_name }},
-        {{ review.title }},
-        {{ review.rating }},
+<div class="card mb-3 mx-auto mt-3" style="max-width: 740px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ book.image.url }}" class="img-fluid rounded-start" alt="{{ book.title }}">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ book.title }}</h5>
+        {% for author in book.authors.all %}
+        <h6 class="card-title"><a href="{% url 'authors:detail' author.slug %}">{{ author.name }} {{ author.surname }}</a></h6>
+        {% endfor %}
+        <p class="card-text"><small class="text-body-secondary">{{ book.finished|date:'Y' }}</small></p>
+        <p class="card-text">{{ book.description }}</p>
+        {% if user.is_authenticated %}
+        <a class="btn btn-primary" href="{% url 'reviews:create' book.slug %}" role="button">Create review</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion" id="accordionExample">
+  {% for review in book.reviews.all %}
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapseOne">
         {% for i in '12345' %}
             {% if forloop.counter <= review.rating %}
-                 <i class="bi bi-star-fill"></i>
+                 <i class="bi bi-star-fill" style="color:yellow"></i>
             {% endif %}
-        {% endfor %},
-        {{  review.created }}
-    </p>
-    {% endfor%}
+        {% endfor %}
+        &nbsp;{{ review.creator.profile.first_name }} {{ review.creator.profile.last_name }}, {{ review.created }}
+      </button>
+    </h2>
+    <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body"><strong>{{ review.title }}.</strong> {{ review.body }}</div>
+    </div>
+  </div>
+  {% endfor%}
+  </div>
+
 </div>
 {% endblock content %}
+

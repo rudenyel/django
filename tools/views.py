@@ -69,7 +69,7 @@ def botfarm_favorites(request):
                     book.favorites.add(user.id)
                 book.save()
     messages.success(request, 'The bot farm has been successfully created!')
-    return HttpResponseRedirect(reverse_lazy('htools:list'))
+    return HttpResponseRedirect(reverse_lazy('tools:list'))
 
 
 @login_required(login_url=reverse_lazy('account:login'))

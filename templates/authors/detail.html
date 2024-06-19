@@ -3,17 +3,29 @@
 {% block title %}{{ author.name }} {{ author.surname }}{% endblock title %}
 
 {% block content %}
-<div>
-    <h1>{{ author.name }} {{ author.surname }}</h1>
-    {% if author.died is None %}
-    <p>{{ author.born }}</p>
-    {% else %}
-    <p>{{ author.born }} - {{ author.died }}</p>
-    {% endif %}
-    <ul>   
-    {% for book in author.books.all %}
-        <li><a href="{% url 'books:detail' book.slug %}">{{ book.title }}</a>, {{ book.finished|date:'Y' }}</li>
-    {% endfor %} 
+<div class="card mb-3 mx-auto mt-3" style="max-width: 740px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ author.image.url }}" class="img-fluid rounded-start object-fit-cover" alt="{{ author.name }} {{ author.surname }}">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h3 class="card-title">{{ author.name }} {{ author.surname }}</h3>
+        {% if author.died is None %}
+        <p class="small mb-1">{{ author.born }}</p>
+        {% else %}
+        <p class="small mb-1">{{ author.born }} - {{ author.died }}</p>
+        {% endif %}
+        <p class="small mb-1">Occupation: {{ author.occupation }}</p>
+        <p class="small">Citizenship: {{ author.citizenship }}</p>
+        <p>{{ author.biography }}</p>
+      </div>
+    </div>
+  </div>
+  <ul class="list-group list-group-flush">
+      {% for book in author.books.all %}
+      <li class="list-group-item"><a href="{% url 'books:detail' book.slug %}">{{ book.title }}</a>, {{ book.finished|date:'Y' }}</li>
+      {% endfor %}
     </ul>
-</div> 
+</div>    
 {% endblock content %}

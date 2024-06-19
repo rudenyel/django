@@ -3,19 +3,24 @@
 {% block title %}Authors{% endblock title %}
 
 {% block content %}
-<div>    
-    <h1>Authors</h1>
-    <ul>    
-    {% for author in authors %}
-    <li>
-        <a href="{% url 'authors:detail' author.slug %}">{{ author.name }} {{ author.surname }}</a>, 
+<div class="row row-cols-1 row-cols-md-6 g-2">
+  {% for author in authors %}
+  <div class="col">
+    <div class="card text-bg-light h-100">
+      <img src="{{ author.image.url }}" class="card-img-top" alt="{{ author.name }} {{ author.surname }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ author.name }} {{ author.surname }}</h5>
         {% if author.died is None %}
-        {{ author.born }}
+        <p class="small">{{ author.born }}</p>
         {% else %}
-        {{ author.born }} - {{ author.died }}
+        <p class="small">{{ author.born }} - {{ author.died }}</p>
         {% endif %}
-    </li>
-    {% endfor %}
-    </ul>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-primary" href="{% url 'authors:detail' author.slug%}" role="button">View</a>
+      </div>    
+    </div>
+  </div>
+  {% endfor %}
 </div>
 {% endblock content %}

@@ -8,21 +8,21 @@
   Your username or password incorrect
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
-{% endif %}    
-<div class="d-grid gap-2 col-2 mx-auto mt-5">
-<form method="post">
-  <div class="mb-3">
+{% endif %}
+<div class="d-grid gap-2 col-3 mx-auto mt-3">
+<form class="border rounded p-3" method="post">
+  <div class="mb-2">
     <label for="id_username" class="form-label">Username</label>
     <input type="text" class="form-control" name="username" id="id_username" maxlength="150" required>
   </div>
-  <div class="mb-3">
+  <div class="mb-2">
     <label for="id_password" class="form-label">Password</label>
     <input type="password" class="form-control" name="password" id="id_password" required>
   </div>
-  <div class="mb-3">    
-    <a href="{% url 'account:password_send' %}">Forgotten your password?</a>  
+  <div class="mb-2">
+    <a href="{% url 'account:password_send' %}">Forgotten your password?</a>
   </div>
-  {% csrf_token %}    
+  {% csrf_token %}
   <button type="submit" class="btn btn-primary">Log in</button>
 </form>
 </div>

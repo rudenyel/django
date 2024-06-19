@@ -3,28 +3,38 @@
 {% block title %}Profile{% endblock title %}
 
 {% block content %}
-<div>
-    <h1>Profile</h1>
-    {% if not messages %}
-    <p>Welcome to your account!</p>
-    {% endif %}
-    {% include 'errors.html' %}    
-    <form method="post">
-        <p><label for="id_username">Username:</label></p>
-        <p><input type="text" value="{{ user.username }}" id="id_username" readonly></p>
-        <p><label for="id_email">E-mail:</label></p>
-        <p><input type="text" value="{{ user.email }}" id="id_email" readonly></p>
-        <p>{{ form.first_name.label_tag }}</p>
-        <p>{{ form.first_name }}</p>
-        <p>{{ form.last_name.label_tag }}</p>
-        <p>{{ form.last_name }}</p>
-        <p>{{ form.phone.label_tag }}</p>
-        <p>{{ form.phone }}</p>
-        <p>{{ form.address.label_tag }}</p>
-        <p>{{ form.address }}</p>
-        {% csrf_token %}
-        <p><input type="submit" value="Update profile"></p>
-    </form>
-    <p><a href="{% url 'account:password_change' %}"><button>Change password</button></a></p>
+{% include 'errors.html' %}      
+<div class="d-grid gap-2 col-3 mx-auto mt-3">
+<form class="border rounded p-3" method="post">
+  <div class="mb-2">
+    <label for="id_username" class="form-label">Username</label>
+    <input type="text" class="form-control" value="{{ user.username }}" name="username" id="id_username" disabled>
+  </div>
+  <div class="mb-2">
+    <label for="id_email" class="form-label">E-mail</label>
+    <input type="email" class="form-control" value="{{ user.email }}" name="email" id="id_email" disabled>
+  </div>  
+  <div class="mb-2">
+    <label for="id_first_name" class="form-label">First name</label>
+    <input type="text" class="form-control" value="{{ form.first_name.value }}" name="first_name" id="id_first_name" maxlength="150">
+  </div>
+  <div class="mb-2">
+    <label for="id_last_name" class="form-label">Last name</label>
+    <input type="text" class="form-control" value="{{ form.last_name.value }}" name="last_name" id="id_last_name" maxlength="150">
+  </div>
+  <div class="mb-2">
+    <label for="id_phone" class="form-label">Phone</label>
+    <input type="text" class="form-control" value="{{ form.phone.value }}" name="phone" id="id_phone" maxlength="150">
+  </div> 
+  <div class="mb-2">
+    <label for="id_address" class="form-label">Address</label>
+    <input type="text" class="form-control" value="{{ form.address.value }}" name="address" id="id_address" maxlength="150">
+  </div>   
+  {% csrf_token %}
+  <button type="submit" class="btn btn-primary">Update profile</button>
+</form>
 </div>
+<div class="d-grid gap-2 col-3 mx-auto mt-3">
+  <a class="btn btn-primary" href="{% url 'account:password_change' %}" role="button">Change password</a>
+</div>      
 {% endblock content %}

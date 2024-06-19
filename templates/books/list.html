@@ -3,51 +3,44 @@
 {% block title %}Books{% endblock title %}
 
 {% block content %}
-<div>
-    <h1>Books</h1>
-    <ul>    
-        {% for book in books %}
-        <li>
-            <a href="{% url 'books:detail' book.slug %}">{{ book.title }}</a>,
-        
-            {% for author in book.authors.all %}
-            <a href="{% url 'authors:detail' author.slug %}">{{ author.name }} {{ author.surname }}</a>,
-            {% endfor %}
-        
-            {{ book.finished|date:'Y' }},
-            
-            {% if not user.is_authenticated %}
-                <i class="bi bi-heart">{{ book.favorites.count }}</i>
-            {% else %}
-                <a href="javascript:void(0)" 
-                   class="toggle-link" 
-                   data-url="{% url 'favorites:ajax_toggle' book.slug %}">
-                {% if user in book.favorites.all %}
-                    <i class="bi bi-heart-fill">{{ book.favorites.count }}</i>
-                {% else %}
-                    <i class="bi bi-heart">{{ book.favorites.count }}</i>
-                {% endif %}
-                </a>
-            {% endif %}
-        
-{#            {% if not user.is_authenticated %}#}
-{#                <i class="bi bi-heart"></i>#}
-{#            {% else %}#}
-{#                <a href="{% url 'favorites:toggle' book.slug %}">#}
-{#                {% if user in book.favorites.all %}#}
-{#                    <i class="bi bi-heart-fill"></i>#}
-{#                {% else %}#}
-{#                    <i class="bi bi-heart"></i>#}
-{#                {% endif %}#}
-{#                </a>#}
-{#            {% endif %}#}
-        
-        
-        </li>
+<h2>{{ category }}</h2>    
+<div class="row row-cols-1 row-cols-md-6 g-2">
+  {% for book in books %}
+  <div class="col">
+  
+    <div class="card text-bg-light h-100">
+      <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ book.title }}</h5>
+        {% for author in book.authors.all %}
+        <h6 class="card-title"><a href="{% url 'authors:detail' author.slug %}">{{ author.name }} {{ author.surname }}</a></h6>
         {% endfor %}
-    </ul>
+        <p class="card-text"><small class="text-body-secondary">{{ book.finished|date:'Y' }}</small></p>
+      </div>
+      
+      <div class="card-footer d-flex justify-content-between">
+        <a class="btn btn-primary" href="{% url 'books:detail' book.slug%}" role="button">View</a>
+        {% if not user.is_authenticated %}
+        <i class="bi bi-heart">{{ book.favorites.count }}</i>
+        {% else %}
+        <a href="javascript:void(0)" 
+                 class="toggle-link" 
+                 data-url="{% url 'favorites:ajax_toggle' book.slug %}">
+        {% if user in book.favorites.all %}
+          <i class="bi bi-heart-fill">{{ book.favorites.count }}</i>
+        {% else %}
+          <i class="bi bi-heart">{{ book.favorites.count }}</i>
+        {% endif %}
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  
+  </div>
+  {% endfor %}
 </div>
 {% endblock content %}
+
 {% block extra_scripts %}
 <script>
   $(document).ready(function () {
