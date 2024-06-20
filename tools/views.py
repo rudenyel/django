@@ -98,15 +98,14 @@ def upload(request):
     authors_images = os.listdir(f"{path}/authors")
     if not authors_images:
         authors_images = ['placeholder.jpg']
-    print(authors_images)
     books_images = os.listdir(f"{path}/books")
     if not books_images:
         books_images = ['placeholder.jpg']
 
     with io.open('upload.csv', encoding='utf-8-sig', mode='r') as file:
         reader = csv.DictReader(file, delimiter=DELIMITER)
-        for row in list(reader):
 
+        for row in list(reader):
             category_slug = slugify(row['category'])
             category, created = Category.objects.get_or_create(
                 name=row['category'], slug=category_slug)
@@ -154,7 +153,6 @@ def upload(request):
                 book.category = category
                 book.authors.add(author)
                 book.save()
-
             image = f"{title_slug}.jpg"
             if image not in books_images:
                 image = random.choice(books_images)
